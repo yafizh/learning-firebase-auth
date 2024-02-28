@@ -1,7 +1,17 @@
-// DOM elements
 const guideList = document.querySelector('.guides');
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
 
-// setup guides
+const setupUI = (user) => {
+    if (user) {
+        loggedInLinks.forEach(item => item.style.display = 'block');
+        loggedOutLinks.forEach(item => item.style.display = 'none');
+    } else {
+        loggedInLinks.forEach(item => item.style.display = 'none');
+        loggedOutLinks.forEach(item => item.style.display = 'block');
+    }
+};
+
 const setupGuides = (data) => {
     if (data.length) {
         let html = '';
