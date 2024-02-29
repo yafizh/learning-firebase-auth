@@ -5,7 +5,12 @@ const accountDetails = document.querySelector('.account-details');
 
 const setupUI = (user) => {
     if (user) {
-        accountDetails.innerHTML = `<div>Logged in as ${user.email}</div>`;
+        db.collection('users').doc(user.uid).get().then(doc => {
+            accountDetails.innerHTML = `
+                <div>Logged in as ${user.email}</div>
+                <div>${doc.data().bio}</div>
+            `;
+        });
 
         loggedInLinks.forEach(item => item.style.display = 'block');
         loggedOutLinks.forEach(item => item.style.display = 'none');
